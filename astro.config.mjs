@@ -2,16 +2,15 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import rehypeExternalLinks from 'rehype-external-links';
 
-// https://astro.build/config
 export default defineConfig({
-  'https://ianlizl.github.io',
+  site: "https://ianlizl.github.io",  // ✅ Correct syntax
   markdown: {
     rehypePlugins: [
       [
         rehypeExternalLinks,
         {
-          target: '_blank',
-          rel: 'noopener noreferrer nofollow',
+          target: "_blank",
+          rel: "noopener noreferrer nofollow",
         },
       ],
     ],
