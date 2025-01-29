@@ -24,6 +24,10 @@ const socialCollection = defineCollection({
       .string()
       .url()
       .refine((val) => val.includes('orcid.org')),
+        linkedin: z
+      .string()
+      .url()
+      .refine((val) => val.includes('linkedin.com')),
     email: z.string().email()
     //   twitter: z
     //     .string()
