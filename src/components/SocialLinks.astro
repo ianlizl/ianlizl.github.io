@@ -26,14 +26,22 @@ const { data } = await getEntry('social', 'social');
       ></path>
     </svg>
   </a>
-  <a href={"mailto:" + data.email}>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-      <title>Email</title>
-      <path
-        d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280 320-200v-80L480-520 160-720v80l320 200Z"
-      ></path>
-    </svg>
-  </a>
+  <a href={data.linkedin} target="_blank" rel="noreferrer noopener">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <title>LinkedIn</title>
+    <path
+      d="M4.98 3.5c0 1.38-1.12 2.5-2.5 2.5S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zm.02 4H0v16h5V7.5H5zm7.5 0h-5V24h5V14.5c0-2.7 2.5-3 2.5-3s2.5.3 2.5 3V24h5V13c0-5.5-5-5.5-5-5.5s-5 0-5 5.5V24z"
+    ></path>
+  </svg>
+</a>
+<a href={`mailto:${data.email}`}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+    <title>Email</title>
+    <path
+      d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280 320-200v-80L480-520 160-720v80l320 200Z"
+    ></path>
+  </svg>
+</a>
   <!-- Twitter and GitHub links removed but kept as comments in case needed later -->
   <!--
   <a href={data.twitter} target="_blank" rel="noreferrer noopener">
