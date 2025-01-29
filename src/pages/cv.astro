@@ -1,0 +1,19 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getEntry } from 'astro:content';
+const { data } = await getEntry('cv', 'cv');
+---
+
+<PageLayout title="CV">
+  <div class="mb-8">
+    <div>
+      <iframe class="h-[700px] w-full" src=`https://drive.google.com/file/d/${data.pdfUrl}/preview` allow="autoplay"
+      ></iframe>
+    </div>
+    <div class="w-full mt-4 text-center">
+      <a class="btn text-sm" href=`https://drive.google.com/uc?export=download&id=${data.pdfUrl}` download
+        >Download CV</a
+      >
+    </div>
+  </div>
+</PageLayout>

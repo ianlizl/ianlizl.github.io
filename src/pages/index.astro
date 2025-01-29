@@ -1,0 +1,41 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import SocialLinks from '../components/SocialLinks.astro';
+const entry = await getEntry('home', 'home');
+const { data } = entry;
+const { Content } = await entry.render();
+---
+
+<PageLayout title="Home">
+  <div class="grid place-items-center min-h-[600px] sm:min-h-[400px] content-center">
+    <div class="flex flex-col space-y-6 sm:flex-row sm:space-x-14 sm:space-y-0">
+      <div class="shrink-0 flex flex-col w-64 mx-auto sm:before:flex-[1] sm:after:flex-[3]">
+        <div>
+          <Image
+            src={data.imageUrl}
+            alt="Yuhao Ba"
+            class="rounded-full h-64 aspect-square object-cover bg-gray-400 animate-pulse-fast"
+            onload='this.classList.remove("animate-pulse-fast")'
+            format="jpg"
+          />
+          <p class="text-sm text-center mt-3">
+            {data.role} at
+            <a class="link" href={data.facultyUrl} rel="noreferrer noopener" target="_blank">
+              {data.faculty}
+            </a>
+          </p>
+          <p class="text-sm text-center mb-5">{data.school}</p>
+          <SocialLinks />
+        </div>
+      </div>
+      <div>
+        <h2 class="mb-2">{data.title}</h2>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </div>
+</PageLayout>

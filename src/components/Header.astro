@@ -1,0 +1,71 @@
+---
+import { SITE_NAME } from '../consts';
+import { Image } from 'astro:assets';
+import Navbar from './Navbar.astro';
+import { ImageMetadata } from 'astro';
+const images = await Astro.glob('/src/content/header/*').then((files) => {
+  return files.map((file) => file.default);
+});
+---
+
+<style>
+  .header-image {
+    @apply w-full h-[211px] absolute object-cover object-center opacity-0;
+  }
+
+  .header-image.active {
+    @apply opacity-40;
+  }
+</style>
+<script>
+  let i = Number(sessionStorage['header']) || 0;
+  const headerImages = document.getElementsByClassName('header-image');
+  if (i >= headerImages.length) {
+    i = 0;
+  }
+  headerImages[i].classList.add('active');
+  function nextImage() {
+    sessionStorage['header'] = i;
+    headerImages[i].classList.add('active');
+    if (headerImages.length === 1) {
+      // Only one header image, no need to fade
+      return;
+    }
+
+    if (i === 0) {
+      // First image, make sure last image is hidden
+      headerImages[headerImages.length - 1].classList.remove('active');
+    } else {
+      headerImages[i - 1].classList.remove('active');
+    }
+
+    headerImages[i].classList.add('transition-opacity');
+    headerImages[i].classList.add('duration-500');
+
+    i++;
+
+    if (i === headerImages.length) {
+      i = 0;
+    }
+
+    setTimeout(nextImage, 6000);
+  }
+
+  // This timeout provides time for the other header images to load
+  // Before we perform the transitions
+  setTimeout(nextImage, 1000);
+</script>
+
+<header class="bg-[#000000] text-gray-500 h-[211px] mb-8">
+  {
+    images.map((i: ImageMetadata) => (
+      <Image src={i} alt="Header Image" class="header-image" loading="eager" format="jpg" />
+    ))
+  }
+  <div class="absolute w-full top-0">
+    <h1 class="text-center py-12">
+      <a href="/">{SITE_NAME}</a>
+    </h1>
+    <Navbar />
+  </div>
+</header>

@@ -1,0 +1,32 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<style>
+  nav > a {
+    @apply py-2 text-lg px-6 flex-1 text-center inline-block;
+  }
+
+  nav > a.active {
+    @apply border-b-2 border-b-blue-400 text-blue-400;
+  }
+</style>
+
+<script>
+  const navbar = document.querySelector('nav');
+  if (sessionStorage['navbar-scroll']) {
+    navbar.scrollLeft = Number(sessionStorage['navbar-scroll']) || 0;
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    sessionStorage['navbar-scroll'] = navbar.scrollLeft;
+  });
+</script>
+
+<nav class="flex mx-auto max-w-4xl justify-start overflow-x-scroll">
+  <a class={currentPath === '/' ? 'active' : ''} href="/">Home</a>
+  <a class={/\/research(\/)?/.test(currentPath) ? 'active' : ''} href="/research/">Research</a>
+  <a class={/\/teaching(\/)?/.test(currentPath) ? 'active' : ''} href="/teaching/">Teaching</a>
+  <a class={/\/team(\/)?/.test(currentPath) ? 'active' : ''} href="/team/">Team</a>
+  <a class={/\/cv(\/)?/.test(currentPath) ? 'active' : ''} href="/cv/">CV</a>
+</nav>

@@ -1,0 +1,14 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+import { getEntry } from 'astro:content';
+import CourseCard from '../components/CourseCard.astro';
+
+const { data: courses } = await getEntry('teaching', 'teaching');
+---
+
+<PageLayout title="Teaching">
+  <div class="px-0 md:px-6">
+    {courses.map((c) => <CourseCard title={c.title} school={c.school} description={c.description} />)}
+  </div>
+</PageLayout>

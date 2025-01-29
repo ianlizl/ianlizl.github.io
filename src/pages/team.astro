@@ -1,0 +1,53 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+import { getEntry } from 'astro:content';
+import TeamCard from '../components/TeamCard.astro';
+
+const { data: team } = await getEntry('team', 'team');
+const { data: alumni } = await getEntry('team', 'alumni');
+---
+
+<style>
+  .team-container {
+    @apply grid grid-cols-1 xs:grid-cols-2 gap-y-10 gap-x-3;
+  }
+</style>
+
+<PageLayout title="Team">
+  <div class="team-container pt-4 xs:pt-8">
+    {team.length === 0 && <p>No team found.</p>}
+    {
+      team
+        .sort((a, b) => (a.firstName.toLowerCase() < b.firstName.toLowerCase() ? -1 : 1))
+        .map((t) => (
+          <TeamCard
+            firstName={t.firstName}
+            lastName={t.lastName}
+            role={t.role}
+            description={t.description}
+            website={t.website}
+            imageUrl={t.imageUrl}
+          />
+        ))
+    }
+  </div>
+  <h2 class="mt-12 mb-4">Alumni</h2>
+  <div class="team-container">
+    {alumni.length === 0 && <p>No alumni found.</p>}
+    {
+      alumni
+        .sort((a, b) => (a.firstName.toLowerCase() < b.firstName.toLowerCase() ? -1 : 1))
+        .map((t) => (
+          <TeamCard
+            firstName={t.firstName}
+            lastName={t.lastName}
+            role={t.role}
+            description={t.description}
+            website={t.website}
+            imageUrl={t.imageUrl}
+          />
+        ))
+    }
+  </div>
+</PageLayout>

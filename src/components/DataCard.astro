@@ -1,0 +1,38 @@
+---
+import * as marked from 'marked';
+import sanitizeHtml from 'sanitize-html';
+
+interface Props {
+  title: string;
+  description: string;
+  link?: URL;
+}
+
+const { title, description, link } = Astro.props;
+
+const renderer = {
+  link(href: string, title: string, text: string) {
+    return `<a class='link' href=${href} target="_blank">${text}</a>`;
+  },
+};
+marked.use({ renderer });
+const parsedDescription = sanitizeHtml(marked.parse(description), {
+  allowedAttributes: {
+    a: ['href', 'class', 'target'],
+  },
+});
+---
+
+<div class="card">
+  <div class="w-full flex justify-between items-start mb-2">
+    <h3>{title}</h3>
+    {
+      link && (
+        <a class="btn text-xs" href={link} target="_blank">
+          Link
+        </a>
+      )
+    }
+  </div>
+  <div class="text-gray-200 mb-2" set:html={parsedDescription} />
+</div>
