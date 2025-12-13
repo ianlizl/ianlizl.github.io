@@ -5,7 +5,6 @@ import ResearchCard from '../components/ResearchCard.astro';
 import { getEntry } from 'astro:content';
 
 const { data: publications } = await getEntry('research', 'publications');
-const { data: workingpapers } = await getEntry('research', 'workingpapers');
 ---
 
 <PageLayout title="Research">
@@ -24,20 +23,5 @@ const { data: workingpapers } = await getEntry('research', 'workingpapers');
       />
     ))}
   </div>
-
-  {workingpapers?.length > 0 && (
-    <div>
-      <h2 class="mt-12 mb-4">Working Papers</h2>
-
-      {workingpapers.map((p) => (
-        <ResearchCard
-          title={p.title}
-          publication={p.publication}
-          authors={p.authors}
-          pdfUrl={p.pdfUrl}
-          doi={p.doi}
-        />
-      ))}
-    </div>
   )}
 </PageLayout>
