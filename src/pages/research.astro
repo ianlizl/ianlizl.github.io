@@ -11,21 +11,33 @@ const { data: workingpapers } = await getEntry('research', 'workingpapers');
 <PageLayout title="Research">
   <div>
     <h2 class="mb-4">Publications</h2>
+
     {publications.length === 0 && <p>No publications currently.</p>}
-    {
-      publications.map((p) => (
-        <ResearchCard title={p.title} publication={p.publication} authors={p.authors} pdfUrl={p.pdfUrl} doi={p.doi} />
-      ))
-    }
+
+    {publications.map((p) => (
+      <ResearchCard
+        title={p.title}
+        publication={p.publication}
+        authors={p.authors}
+        pdfUrl={p.pdfUrl}
+        doi={p.doi}
+      />
+    ))}
   </div>
 
-  <div>
-    <h2 class="mt-12 mb-4">Working Papers</h2>
-    {workingpapers.length === 0 && <p>No working papers currently.</p>}
-    {
-      workingpapers.map((p) => (
-        <ResearchCard title={p.title} publication={p.publication} authors={p.authors} pdfUrl={p.pdfUrl} doi={p.doi} />
-      ))
-    }
-  </div>
+  {workingpapers?.length > 0 && (
+    <div>
+      <h2 class="mt-12 mb-4">Working Papers</h2>
+
+      {workingpapers.map((p) => (
+        <ResearchCard
+          title={p.title}
+          publication={p.publication}
+          authors={p.authors}
+          pdfUrl={p.pdfUrl}
+          doi={p.doi}
+        />
+      ))}
+    </div>
+  )}
 </PageLayout>
