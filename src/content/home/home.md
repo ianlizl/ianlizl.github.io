@@ -3,7 +3,7 @@ title: 'Welcome'
 role: 'Assistant Professor'
 faculty: 'the Department of Politics and Public Administration'
 school: 'The University of Hong Kong'
-facultyUrl: 'https://ppa.hku.hk/faculties/name/zyli'
+facultyUrl: 'https://ppa.hku.hk/'
 imageUrl: './ian-li.jpg'
 ---
 
